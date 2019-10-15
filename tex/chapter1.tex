@@ -1,117 +1,13 @@
-\chapter{INTRODUCTION} \label{intro}
+\chapter{INTRODUCTION} \label{introduction}
 
-We don't make the Chapter titles in All Caps Automatically because it is easier for you to type your Chapter Titles in uppercase than for those that need to have mixed case in their titles to find the correct command in the ufthesis.cls file and change it there. \cite{strickler1998contamination}
+Plant phenology, the timing of recurring biological events such as flowering, plays an important role in ecological research extending from local to global scales \citep{cleland2007, richardson2013, tang2016}. At large scales the timing of spring leaf out and fall senescence influence the carbon budget of earth system models, which has implications for correctly accounting for biosphere-atmosphere feed backs in long-term climate forecasts \citep{richardson2012}. At smaller scales, species-specific responses to temperature and precipitation can alter flower communities \citep{diez2012, caradonna2014, theobald2017} and affect the abundance and richness of both pollinators \citep{ogilvie2017a, ogilvie2017b} and organisms at higher trophic levels \citep{tylianakis2008}. 
 
-\section{The Section Command Text Should Be in Title Case}
+Because of the central importance of phenology, advanced forecasts for when phenological events will occur have numerous potential applications including: 1) research on the cascading effects of changing plant phenology on other organisms; 2) tourism planning related to flower blooms and autumn colors; 3) planning for sampling and application of management interventions by researchers and managers; and 4) agricultural decisions on timing for planting, harvesting, and application of pest prevention techniques. However, due to the challenges of automatically integrating, predicting, and disseminating large volumes of data, there are limited examples of applied phenology forecast systems. Plant phenology models that are robust at multiple ecological scales, or deemed appropriate for a particular scale, are needed to better understand and forecast the timing of key biological events. Additionally, phenology data at a suitable spatial extent has only recently come online and poses several challenges for validation and integration into phenological models. 
 
- Title case is where all principal words are capitalized except prepositions, articles, and conjunctions.  \cite{green2008wrinkle}
+Plant phenology models have historically been parameterized using data from long-term, well-sampled study sites. Yet data from a single location might not be suitable for large-scale phenology forecasts. Large-scale data is available, but comes from citizen science programs where several potentially biases can be introduced \citep{dickinson2010}. A thorough evaluation of the data capability is needed before integrating citizen science data into the pipeline for a plant phenology forecast. Data validation will ensure that any potential biases in the phenological observations are either non-existent, or too small to affect phenological models. 
 
-\subsection{Subsection Commands Are Also in Title Case}
-The difference, of course, are the second level headings are left-aligned
+The variable of interest in plant phenology models is the transition date. For example the date a flower blooms or leaf emerges is the onset transition date. Other common transition dates are first observed open flowers or new leafs on a plant, but can also include peak flower, fruit maturation, and leaf senescence. Historic datasets often use repeated observations to identify the true transition date  \citep{davis2015, wolkovich2012}, yet this is susceptible to observer bias  \citep{miller-rushing2008}. Most modern studies and collection protocols use status-based monitoring, where observers record the current state of a plant (ie. leaves present or absent) without necessarily conducting repeated observations to observe recent or future transitions. This includes research using herbarium records, where the presence or absence of flowers and other phenophases is inferred from their presence on a specimen  \citep{willis2017}. To make use of status-based data in most phenological models the transition date must first be estimated, and to date few comprehensive comparison of these estimators have been performed. Here I perform an evaluation of several transition date estimators using an 11 year observational dataset. 
 
-\subsubsection{Subsubsections are in sentence case}
-The third level subheadings are left-aligned but in sentence case. Only the first letter and any proper nouns are capitalized.
+Large-scale forecast systems are are complex pipelines which ingest, process, and combine several continuous streams of data. The knowledge acquired and lessons learned in building these systems will help define best practices and needed tools and training for other groups to implement similar systems \citep{yenni2019}. A thorough description of the pipeline, and the challenges which were overcome in building it, will help advance the field of ecological forecasting. This pipeline description, along with validation of phenological data, are the first steps in implementing a continuously updated phenology forecast system. 
 
-\subsubsection{If you divide a section, you must divide it into two, or more, parts}
-
-{\bf Paragraph headings.} There is no official fourth level heading. Do not use the Paragraph heading feature in LaTeX, simply apply the bold characteristic to the first few words of a paragraph followed by a colon or period.
-
-\subsection{I Need Another Second Level Heading in This Section}
-
-Aliquam mi nisi, tristique at rhoncus quis, consectetur non mi. Phasellus blandit quam ligula, a viverra lacus commodo at. In iaculis nisl vel pretium sollicitudin. In efficitur massa vel elit sollicitudin, vel auctor sapien cursus. Proin feugiat sapien a mi tempus, in consequat augue cursus. Nulla sed sagittis purus. Nunc eu consequat orci, eu laoreet enim. Ut euismod tincidunt sem, eget lacinia dui luctus eu. Aliquam mi augue, faucibus id semper vitae, porta ac ligula. Morbi sed ultrices odio. Mauris id luctus ex. Nulla ac libero dictum, interdum turpis lacinia, scelerisque leo. Praesent varius orci ac eros varius pharetra.
-
-\section{Image Handling in XeLaTeX}
-
-One of the biggest reasons for switching from the dvipdfm/dvipdfmx methods of compiling is the improved image handling capabilities. EPS, Bit-mapped, PDF, JPG, and PNG formats work well with the xelatex process.
-
-\subsection{The Traditional EPS Format}
-
-EPS format is the traditional format for LaTeX, but EPS files can be very large and many programs can't create or view these images. There are many programs that are used to interpret data and output the results as an EPS format image. It has been my experience that there are bounding box problems with these figures. On many occasions we have opened the image in Adobe Photoshop and, without making any changes, saved the document as a Photoshop EPS file, re-compiled the document, and the image worked correctly, so if you are having problems with an EPS image not showing in your document correctly, try this fix first.
-
-
-\begin{figure}[htbp]
-  \centering
-    \includegraphics[width=5in]{images/diagram}
-    \caption[EPS format diagram. Note: no filetype is designated by adding an extension.]{EPS format diagram. Note: no filetype is designated by adding an extension. The file type is determined and the correct procedure is automatically chosen by xelatex.}
-\end{figure}
-
-
-Quisque malesuada a leo eget ullamcorper. Curabitur ut aliquam quam. Nam quis quam id mauris aliquam blandit porttitor sit amet quam. Donec ut erat eleifend turpis finibus pulvinar.
-
-\subsection{Bitmapped Images Work As Well}
-
-Bitmapped images are a standard file type on PCs, but these files are also usually very large so compressed images may be a better alternative.
-
-\begin{figure}[htbp]
-  \centering
-    \includegraphics[width=5in]{images/eagle}
-    \caption[BMP format drawing. Note: no filetype is designated by adding an extension.]{BMP format drawing. Note: no filetype is designated by adding an extension. The file type is determined and the correct procedure is automatically chosen by xelatex.}
-\end{figure}
-
-Morbi hendrerit risus nec quam posuere viverra. Donec quis tellus faucibus, molestie arcu sed, congue urna. Duis eget neque ac libero pulvinar porta eget et magna. Donec a magna eu eros suscipit cursus ac vitae nisl. Vivamus ligula purus, congue sed tortor blandit, ultrices egestas nisl.
-
-\subsection{Not to Mention PDF}
-
-It is often very handy to be able to include a pdf file as an image. By using XeLaTeX this is usually just matter of setting the size, or scale properties correctly.
-
-\begin{figure}[htbp]
-  \centering
-    \includegraphics[scale=1.0]{images/graph.pdf}
-    \caption[PDF format graph. Note: no filetype is designated by adding an extension.]{PDF format graph. Note: no filetype is designated by adding an extension. The file type is determined and the correct procedure is automatically chosen by xelatex.}
-\end{figure}
-
-Nulla mattis augue lacus. Nam non lectus dolor. Cras ac quam vel justo elementum vestibulum. Integer vulputate pulvinar lacus sit amet pulvinar.
-
-\subsection{JPG Is Absolutely Necessary}
-
-For photographs, JPG is the most common format. This format is a fraction of the size of Bit-mapped images and can deliver very good quality at a much smaller overhead. Vestibulum eu lectus vel orci dictum vehicula. Proin id maximus dolor. Integer augue ante, pulvinar ac erat vitae, porttitor ullamcorper libero. \cite{l2012wrinkle}
-
-\begin{figure}[htbp]
-  \centering
-    \includegraphics[width=5in]{images/nebula}
-    \caption[JPG format image. Note: no filetype is designated by adding an extension.]{JPG format image. Note: no filetype is designated by adding an extension. The file type is determined and the correct procedure is automatically chosen by xelatex.}
-\end{figure}
-
-Nunc blandit scelerisque velit, ac facilisis dui finibus et. Sed facilisis tortor vel commodo luctus. Donec est felis, malesuada id nibh in, accumsan malesuada lectus. Sed lobortis volutpat felis, vitae aliquet augue congue id. Fusce ut odio tincidunt, condimentum nulla vel, pharetra arcu.
-
-\subsection{PNGs Will Help Make Files Smaller}
-
-PNG files are even smaller than JPGs and are very good when text and images are combined.
-
-\begin{figure}[htbp]
-  \centering
-    \includegraphics[width=5in]{images/theworld}
-    \caption[PNG format map. Note: no filetype is designated by adding an extension.]{PNG format map. Note: no filetype is designated by adding an extension. The file type is determined and the correct procedure is automatically chosen by xelatex.}
-\end{figure}
-
-
-
-Aenean condimentum libero sed mi porta, tempus ullamcorper lectus venenatis. Aliquam in diam dolor. Maecenas tempus consectetur sem et pulvinar. Aenean aliquam at metus ut hendrerit. Vivamus molestie ac neque eu luctus. Nam convallis maximus quam non lobortis. Fusce sit amet lorem et massa convallis aliquet at sit amet nulla. Suspendisse nec ex elit. Aenean gravida, sapien vitae congue commodo, urna turpis ornare libero, at cursus risus libero in erat. \cite{Rust94}
-
-\section{GIF, TIF, and Others}
-
-Other file formats have not been successful, with or without file extensions. The tests have not been exhaustive so if you have a different type, give it a try. GIF, and TIF both do NOT work at this time.
-
-Aliquam mi nisi, tristique at rhoncus quis, consectetur non mi. Phasellus blandit quam ligula, a viverra lacus commodo at. In iaculis nisl vel pretium sollicitudin. In efficitur massa vel elit sollicitudin, vel auctor sapien cursus. Proin feugiat sapien a mi tempus, in consequat augue cursus. Nulla sed sagittis purus. Nunc eu consequat orci, eu laoreet enim. Ut euismod tincidunt sem, eget lacinia dui luctus eu. Aliquam mi augue, faucibus id semper vitae, porta ac ligula. Morbi sed ultrices odio. Mauris id luctus ex. Nulla ac libero dictum, interdum turpis lacinia, scelerisque leo. Praesent varius orci ac eros varius pharetra.
-
-
-
-Nunc blandit scelerisque velit, ac facilisis dui finibus et. Sed facilisis tortor vel commodo luctus. Donec est felis, malesuada id nibh in, accumsan malesuada lectus.
-\begin{itemize} %
-    \item WinEDT: This text editor is recommended for use editing \TeX-files as it has many useful built in macros and is easy to use  %
-    \item This program can be found and downloaded here: \url{http://www.winedt.com/} %
-    \item The GIMP (GNU Image Manipulation Program) %
-    \begin{itemize}%
-        \item A freeware graphics editing program for picture editing and file conversions %\vspace{-12pt}%
-        \item Comparable to Adobe Photoshop %\vspace{-12pt}%
-        \item Can be downloaded here: \url{http://www.gimp.org/}%
-    \end{itemize}
-    \item A good reference of \LaTeX 2\ensuremath{\epsilon} commands%
-    \begin{itemize}
-        \item This should be included on the ETD website here: \url{http://etd.helpdesk.ufl.edu/tex.php}
-    \end{itemize}
-\end{itemize} %
-
-
-Sed lobortis volutpat felis, vitae aliquet augue congue id. Fusce ut odio tincidunt, condimentum nulla vel, pharetra arcu. In ultricies libero diam, nec rutrum magna vehicula nec. Praesent dictum eros sit amet turpis ultricies, eleifend condimentum dui imperdiet. Donec congue urna ante, id rutrum mi commodo a. Vivamus id tincidunt nunc. Morbi id lacus ut augue ultricies convallis. Duis a lectus quis ante pretium scelerisque nec nec nisi. In id porta justo, at euismod diam. Suspendisse vel tempus arcu. Praesent vel cursus nisi, ac rhoncus odio.
 

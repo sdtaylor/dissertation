@@ -5,8 +5,8 @@
 
 % Define Packages To be used and options %
 \include{packages}
-%\def\UrlFont{\rmfamily} %use this line for Times New Roman
-\def\UrlFont{\sffamily} %use this line for CMSS
+\def\UrlFont{\rmfamily} %use this line for Times New Roman
+% \def\UrlFont{\sffamily} %use this line for CMSS
 
 %\allowdisplaybreaks  % % This command allows equation arrays and similar environments
 % % % to break across pages to improve text flow - use only if needed.
@@ -31,29 +31,24 @@
 %------------------------------------------%
 
 % Set your personal and paper information
-\SetFullName{James K. Booth}%
-\SetThesisType{Tutorial}%{Dissertation} %{Thesis}
-\SetDegreeType{Master of the Universe}% {Doctor of Philosophy} {Master of Science}
-\SetGradMonth{May}%
-\SetGradYear{2014}%
-\SetDepartment{Electronic Thesis and Dissertations}%
-\SetChair{James B. Albury}%
+\SetFullName{Shawn David Taylor}%
+\SetThesisType{Dissertation}%{Dissertation} %{Thesis}
+\SetDegreeType{Doctor of Philosophy}% {Doctor of Philosophy} {Master of Science}
+\SetGradMonth{December}%
+\SetGradYear{2019}%
+\SetDepartment{Interdisciplinary Ecology}%
+\SetChair{Ethan P. White}%
 %\SetCochair{John W. Carver III}%uncomment this line and enter the name of your cochair inside the braces if you have one.
 %If you have a cochair there two places in the ufthesis.cls file that will need to be uncommented as well
 %In the "getting personal information" section about line 630
 %And the "Abstract" Section around line 556
 % Type your title here in all CAPS %
-\SetTitle{UF ETD \LaTeXe  THESIS AND DISSERTATION TEMPLATE TUTORIAL}
+\SetTitle{FORECASTING PLANT PHENOLOGY: AN ASSESSMENT OF DATA SOURCES AND ESTIMATORS, AND A FULLY AUTOMATED IMPLEMENTATION}
 
 
 
 % Define student-specific info (self-explanatory) %
 %\include{userinfo}
-
-
-
-
-
 
 %------------------------------------------%
 
@@ -88,10 +83,10 @@
 %\bibliographystyle{bst/alphaurl_uf}
 %\bibliographystyle{bst/apa-good}
 %\bibliographystyle{bst/Chicago_Web}
-%\bibliographystyle{bst/ecology_web}
+\bibliographystyle{bst/ecology_web}
 %\bibliographystyle{bst/IEEEtran}
 %\bibliographystyle{bst/mla_web}
-\bibliographystyle{bst/mla-good}
+%\bibliographystyle{bst/mla-good}
 %\bibliographystyle{bst/plainnat}
 %\bibliographystyle{bst/plainurl_uf}
 %\bibliographystyle{bst/Science_Web}
@@ -177,8 +172,9 @@
 % The citation style differences are from the \citet{key} and \citep{key} commands
 % More options are available; see the Natbib documentation for details
 
+%\interlinepenalty=10000
 
-\bibliography {bib/sample,bib/example}
+\bibliography {bib/dissertation_refs}
 % You can have more than one library of references - put the .bib file
 % in the bib folder and call it here
 %------------------------------------------%

@@ -1,134 +1,298 @@
-\chapter{DERIVATION OF THE $\Upsilon$ FUNCTION}%
-\label{appendixC}
+\chapter{SUPPLEMENTARY MATERIAL FOR CHAPTER 4}
 
-%\clearpage %remove this command if your appendix doesn't start with a landscaped page!!!!!
-%\thispagestyle{plain}
-%\begin{landscape}
-%\begin{figure}
+\section{Description of the Phenology Model Weighting}\label{appendix-a}
 
- % \begin{center}
-  %  \includegraphics[width=6in]{LaTeX2e_logo.eps}
-   % \caption{\LaTeX 2\ensuremath{\epsilon.} logo}\label{biglogo}
-  %\end{center}
-%\end{figure}
-%\end{landscape}
+We used a weighted ensemble of the four models for each species and phenophase. The weights for each model within the ensemble were derived via stacking as described in \cite{dormann2018}. The steps for calculating weights are as followed:
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{enumerate}
+    \item Subset the phenology data into random training/testing sets.
+    \item Fit each core model on the training set.
+    \item Make predictions on the testing set.
+    \item Find the weights which minimize RMSE of the testing set.
+    \item Repeat 1-4 for 100 iterations.
+    \item Take the average weight for each model from all iterations as the final weight used in the ensemble. These will sum to 1.
+    \item Fit the core models a final time on the full dataset. Parameters derived from this final iterations will be used to make predictions, which are then used in the final weighted average. 
+\end{enumerate}
 
+The four phenology models are applied to each of the five members of the climate ensemble, with a final predicted value, $\widehat{DOY}_{forecast}$, derived as:
 
-%ADD LABEL
+$$\widehat{DOY}_{forecast} = \frac{1}{5}\sum_{n=1}^{5}\sum_{i=1}^{4}w_{i}\widehat{DOY}_{n,i}$$
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Where $n$ is the climate ensemble member, $i$ is the phenology model, $w$ is the phenology model weight, and $\widehat{DOY}$ the estimated Julian day. 
 
-\proposition{The Upsilon Function}\label{first}
+Uncertainty is the 95\% confidience interval of the estimates from the five climate ensembles:
 
-(1) If $\beta>0$ and $\alpha\neq0$, then for all $n\geq-1$,
-
-$$I_{n}(c;\alpha; \beta; \delta) = - \frac{e^{\alpha c}}{\alpha} \sum_{i=0}^{n}(\frac{\beta}{\alpha})^{n-i} Hh_{i}(\beta c -\delta)$$
-
-$$+ (\frac{\beta}{\alpha})^{n+1} \frac{\sqrt{2 \pi}}{\beta} e^{\frac{\alpha \delta}{\beta}+\frac{\alpha^{2}}{2\beta^{2}}} \phi(-\beta c + \delta + \frac{\alpha}{\beta})$$
-(2) If $\beta<0$ and $\alpha<0$, then for all $x \geq -1$
-
-$$I_{n}(c;\alpha; \beta; \delta) = - \frac{e^{\alpha c}}{\alpha} \sum_{i=0}^{n}(\frac{\beta}{\alpha})^{n-i} Hh_{i}(\beta c -\delta)$$
-
-$$- (\frac{\beta}{\alpha})^{n+1} \frac{\sqrt{2 \pi}}{\beta} e^{\frac{\alpha \delta}{\beta}+\frac{\alpha^{2}}{2\beta^{2}}} \phi(\beta c - \delta - \frac{\alpha}{\beta})$$
-
-\begin{proof}{Case 1.}
-
-$\beta>0$ and $\alpha\neq0$. Since, for any constant $\alpha$ and $n \geq 0$, $e^{\alpha x} Hh_{n}(\beta x - \delta) \rightarrow 0$ as $x \rightarrow \infty$ thanks to (B4), integration by parts leads to
-
-$$I_{n}=-\frac{1}{\alpha}Hh(\beta c -\delta) e^{\alpha c} + \frac{\beta}{\alpha}\int_{c}^{\infty} e^{\alpha x} Hh_{n-1}(\beta c - \delta)dx$$
-
-In other words, we have a recursion, for $n \geq 0$, $I_{n}=-(e^{\alpha c}{\alpha})Hh_{n}(\beta c - \delta) + (\frac{\beta}{\alpha})I_{n-1}$ with
-
-$$I_{-1}=\sqrt{2 \pi} \int_{c}{\infty}e^{\alpha x}\varphi(-\beta x +\delta)dx$$
-
-$$=\frac{\sqrt{2 \pi}}{\beta} e^{\frac{\alpha \delta}{\beta}+\frac{\alpha^{2}}{2 \beta^{2}}}\phi(-\beta c + \delta +\frac{\alpha}{\beta})$$
-
-Solving it yields, for $n \geq -1$,
-
-$$I_{n}=-\frac{e^{\alpha c}}{\alpha}\sum_{i=0}^{n}(\frac{\beta}{\alpha})^{i}Hh_{n-i}(\beta c+\delta) + (\frac{\beta}{\alpha})^{n+1}I_{-1}$$
-
-$$=-\frac{e^{\alpha c}}{\alpha}\sum_{i=0}^{n}(\frac{\beta}{\alpha})^{n-i} Hh_{i}(\beta c+\delta)$$
-
-$$+ (\frac{\beta}{\alpha})^{n+1}\frac{\sqrt{2 \pi}}{\beta} e^{\frac{\alpha \delta}{\beta}+\frac{\alpha^{2}}{2 \beta^{2}}}\phi(-\beta c + \delta +\frac{\alpha}{\beta})$$
-
-where the sum over an empty set is defined to be zero.
-\end{proof}
-
-Case2. $\beta<0$ and $\alpha<0$. In this case, we must also have, for $n \geq 0$ and any constant $\alpha<0, e^{\alpha x}Hh_{n}(\beta x -\delta) \rightarrow 0$ as
-
-$x \rightarrow \infty$, thanks to (B5). Using integration by parts, we again have the same recursion, for $n \geq 0, I_{n}=-(e^{\alpha c}/\alpha)Hh_{n}(\beta c - \delta)+(\beta / \alpha)I_{n-1}$, but with a different initial condition
-
-$$I_{-1}=\sqrt{2 \pi}\int_{c}^{\infty}e^{\alpha x}\varphi(-\beta x + \delta)dx$$
-
-$$=-\frac{\sqrt{2 \pi}}{\beta} exp\{\frac{\alpha \delta}{\beta}+\frac{\alpha^{2}}{2 \beta^{2}}\}\phi(\beta c - \delta -\frac{\alpha}{\beta})$$
-
-Solving it yields (B8), for $n \geq -1$.
-
-Finally, we sum the double exponential and the normal random variables
-
-Proposition B.3.
-
-Suppose $\{\xi_{1},\xi_{2},...\}$ is a sequence of i.i.d. exponential random variables with rate $\eta>0$, and Z is a normal variable with distribution $N(0,\sigma^{2})$. Then for every $ n \geq 1$, we have: (1) The density functions are given by:
-
-$$f_{Z+\sum_{i=1}^{n}\xi_{i}}(t)=(\sigma\eta)^{n}\frac{e^{(\sigma\eta)^{2}/2}}{\sigma\sqrt{2\pi}}e^{-t\eta}Hh_{n-1}(-\frac{t}{\sigma}+\sigma\eta)$$
-
-$$f_{Z-\sum_{i=1}^{n}\xi_{i}}(t)=(\sigma\eta)^{n}\frac{e^{(\sigma\eta)^{2}/2}}{\sigma\sqrt{2\pi}}e^{-t\eta}Hh_{n-1}(\frac{t}{\sigma}+\sigma\eta)$$
-(2) The tail probabilities are given by
-
-$$P(Z+\sum_{i=1}^{n}\xi_{i}\geq x) = (\sigma\eta)^{n}\frac{e^{(\sigma\eta)^{2}/2}}{\sigma\sqrt{2\pi}}e^{-t\eta}I_{n-1}(x;-\eta,-\frac{1}{\sigma},-\sigma\eta)$$
-
-$$P(Z-\sum_{i=1}^{n}\xi_{i}\geq x) = (\sigma\eta)^{n}\frac{e^{(\sigma\eta)^{2}/2}}{\sigma\sqrt{2\pi}}e^{-t\eta}I_{n-1}(x;\eta,\frac{1}{\sigma},-\sigma\eta)$$
-
-Proof. Case 1. The densities of $Z+\sum_{i=1}^{n}\xi_{i}$, and $Z-\sum_{i=1}^{n}\xi_{i}$. We have
-
-$$f_{Z+\sum_{i=1}^{n}\xi_{i}}(t)=\int_{-\infty}^{\infty}f_{\sum_{i=1}^{n}\xi_{i}}(t-x)f_{Z}(x)dx$$
-
-$$=e^{-t\eta}(\eta^{n})\int_{-\infty}{t}\frac{e^{x\eta}(t-x)^{n-1}}{(n-1)!}\frac{1}{\sigma\sqrt{2\pi}}e^{-x^{2}/(2\sigma^{2})}dx$$
-
-$$=e^{-t\eta}(\eta^{n})e^{(\sigma\eta)^{2}/(2)}\int_{-\infty}{t}\frac{(t-x)^{n-1}}{(n-1)!}\frac{1}{\sigma\sqrt{2\pi}}e^{-(x-\sigma^{2}\eta)^{2}/(2\sigma^{2})}dx$$
-
-Letting $y=(x-\sigma^{2}\eta)/\sigma$ yields
-
-$$f_{Z+\sum_{i=1}^{n}\xi_{i}}(t)=e^{-t\eta}(\eta^{n})e^{(\sigma\eta)^{2}/(2)}\sigma^{n-1}$$
-
-$$\times\int_{-\infty}^{t/\sigma-\sigma\eta}\frac{(t/\sigma - y -\sigma\eta)^{n-1}}{(n-1)!}\frac{1}{\sqrt{2\pi}}e^{-y^{2}/2}dy$$
-
-$$=\frac{e^{(\sigma\eta)^{2}/2}}{\sqrt{2\pi}}(\sigma^{n-1}\eta^{n})e^{-t\eta}Hh_{n-1}(-t/\sigma + \sigma\eta)$$
-
-because $(1/(n-1)!)\int_{-\infty}{a}(a-y)^{n-1}e^{-y^{2}/2}dy=Hh_{n-1}(a)$. The derivation of $f_{Z+\sum_{i=1}^{n}\xi_{i}}(t)$ is similar.
-
-Case 2. $P(Z+\sum_{i=1}^{n}\xi_{i}\geq x)$ and $P(Z-\sum_{i=1}^{n}\xi_{i}\geq x)$. From (B9), it is clear that
-
-$$P(Z+\sum_{i=1}^{n}\xi_{i}\geq x)=\frac{(\sigma\eta)^{n}e^{(\sigma\eta)^{2}/2}}{\sigma\sqrt{2\pi}}\int_{x}^{\infty}e^{(-i\eta)}Hh_{n-1}(-\frac{t}{\sigma}+\sigma\eta)dt$$
-
-$$=\frac{(\sigma\eta)^{n}e^{(\sigma\eta)^{2}/2}}{\sigma\sqrt{2\pi}}I_{n-1}(x;-\eta,-\frac{1}{\sigma},-\sigma\eta)dt$$
-
-by (B6). We can compute
-$P(Z-\sum_{i=1}^{n}\xi_{i}\geq x)$ similarly.
-
-\theorem{Theorem} With $\pi_{n}:= P(N(t)=n)=e^{-\lambda T}(\lambda T)^{n}/n!$ and $I_{n}$ in Proposition \ref{first}.
-, we have
-
-$$P(Z(T)\geq a)=\frac{e^{(\sigma \eta_{1})^{2} T/2}}{\sigma \sqrt{2 \pi T}} \sum_{n=1}^{\infty} \pi_{n} \sum_{k=1}^{n} P_{n,k}(\sigma\sqrt{T}\eta_{1})^{k}\times I_{k-1}(a-\mu T; -\eta_{1},-\frac{1}{\sigma\sqrt{T}},-\sigma\eta_{1}\sqrt{T})$$
-
-$$+\frac{e^{(\sigma\eta_{2})^{2}T/2}}{\sigma\sqrt{2\pi T}}\sum_{n=1}^{\infty}\pi_{n}\sum_{k=1}^{n}Q_{n,k}(\sigma\sqrt{T}\eta_{2})^{k}$$
-
-$$\times I_{k-1}(a-\mu T; \eta_{2},\frac{1}{\sigma\sqrt{T}},-\sigma\eta_{2}\sqrt{T})$$
-
-$$+\pi_{0}\phi(-\frac{a-\mu T}{\sigma\sqrt{T}})$$
-
-Proof by the decomposition (B2)
-
-$$P(Z(T) \geq a)= \sum_{n=0}^{\infty}\pi_{n} P(\mu T +\sigma\sqrt{T} Z + \sum_{j=1}^{n}Y_{j} \geq a)$$
-
-$$=\pi_{0}P(\mu T +\sigma\sqrt{T} Z  \geq a)$$
-
-$$+\sum_{n=1}^{\infty}\pi_{n}\sum_{k=1}^{n}P_{n,k} P(\mu T +\sigma\sqrt{T} Z + \sum_{j=1}^{n}\xi_{j}^{+} \geq a)$$
-
-$$+\sum_{n=1}^{\infty}\pi_{n}\sum_{k=1}^{n}Q_{n,k} P(\mu T +\sigma\sqrt{T} Z - \sum_{j=1}^{n}\xi_{j}^{-} \geq a)$$
-
-The result now follows via (B11) and (B12) for $\eta_{1} > 1$ and $\eta_{2} >0$.
+$$2 * \sqrt{\frac{1}{5}\sum_{n=1}^{5}(\widehat{DOY}_{n} - \widehat{DOY}_{forecast})^{2}}$$
 
 
+\section{Description of the Climate Downscaling Model}
+
+The Climate Forecast System Version 2 (CFSv2) is a coupled atmosphere-ocean-land global circulation model maintained by the National Oceanic and Atmospheric Administration (NOAA)[@saha2014]. The model tracks over 1000 global state variables of varying resolution and forecast length, such as ocean temperature and heights of pressure bands. Here we use the 2-meter temperature variable, which has a 6-hour timestep and a spatial resolution of 0.25 degrees latitude/longitude. The forecast is updated every 6 hours with the latest initial conditions and projected out 9 months. 
+
+The CFSv2 also has a reanalysis available. A climate reanalysis is a run of the full model over a prior time period with constant assimilation of known conditions. In practice this allows for analysis of state variables which are not able to be measured (such as the 500mb height over the arctic in winter). Here it allows us to build a downscaling model using the CFSv2 model’s best estimate of past conditions of land surface temperature. These past conditions are regressed against finer grained “known” conditions from a different gridded dataset on a per pixel basis. We used the 2-m temperature output from the reanalysis from 1995-2015 as well as 4km daily mean temperature from the PRISM dataset \citep{prismdata} to build a downscaling model using asynchronous regression (Figure \ref{fig-4-1}). The model and theory are described in \cite{stoner2013} and references therein. The CFSv2 data is first interpolated from the original 0.25 degree grid to a 4km grid using distance weighted sampling, then the following method is applied to each 4km pixel and calendar month.
+
+\begin{enumerate}
+    \item Collect all daily mean temperature observations from 21 years of data from both the CFSv2 reanalysis and the PRISM dataset. This provides 588 - 641 points representing daily temperature for a single pixel and calendar month.
+    \item In addition to the data from each calendar month, also include data for the 14 days prior and 14 days following the calendar month, adding an addition 588 data points (21*(14+14)). This helps account for future novel conditions.
+    \item Order each dataset by their rank, such that the lowest value from the PRISM dataset is matched to the lowest value from the CFSv2 reanalysis.
+    \item Fit a linear regression model.
+\end{enumerate}
+
+The two parameters from the regression model are saved in a netCFD file which can later be referenced by location and calendar month (Figure \ref{fig-4-1}, H). This downscaling model, at the scale of the continental U.S.A., is used to downscale the most recent CFSv2 forecasts to a 4km resolution during the automated steps. 
+
+%%%%%%%%%%%%%%%%%
+%% Table C1 - Species and their associated phenophases used in the forecast system
+%%%%%%%%%%%%%%%%%
+\newpage
+
+\section{Supplementary Tables}
+
+\begin{table}
+    \caption[Species and their associated phenophases used in the forecast system]{Species and their associated phenophases used in the forecast system. Note not all species have forecasts for all phenophases due to data availability. A * indicates a contributed model which was not built using USA-NPN data.}
+    \label{table-c-1}
+\begin{tabularx}{\textwidth}{p{0.5cm}XXXXX}
+\hline
+& Species & Budburst & Fall Colors & Flowers & Ripe Fruits\\
+\hline
+
+1 & Acacia greggii &  &  & $\checkmark$ &  \\ 
+2 & Acer circinatum & $\checkmark$ &  & $\checkmark$ &  \\ 
+3 & Acer macrophyllum & $\checkmark$ &  & $\checkmark$ &  \\ 
+4 & Acer negundo & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+5 & Acer pensylvanicum & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+6 & Acer rubrum & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+7 & Acer saccharinum & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+8 & Acer saccharum & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+9 & Aesculus californica & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+10 & Alnus incana & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+11 & Alnus rubra & $\checkmark$ & $\checkmark$ &  &  \\ 
+12 & Amelanchier alnifolia & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+13 & Artemisia tridentata &  &  & $\checkmark$ &  \\ 
+14 & Berberis aquifolium* &  &  & $\checkmark$ & $\checkmark$ \\ 
+15 & Betula alleghaniensis & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+16 & Betula lenta & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+17 & Betula nigra & $\checkmark$ &  & $\checkmark$ &  \\ 
+18 & Betula papyrifera & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+19 & Carpinus caroliniana & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+20 & Carya glabra & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+
+\hline
+\end{tabularx}
+\end{table}
+
+% Table C-1 continued, page 2/4
+
+\begin{table}
+\begin{tabularx}{\textwidth}{p{0.5cm}XXXXX}
+\multicolumn{3}{l}{Table \ref{table-c-1}. Continued}\\
+\hline
+& Species & Budburst & Fall Colors & Flowers & Ripe Fruits\\
+\hline
+21 & Celtis occidentalis & $\checkmark$ &  &  &  \\ 
+22 & Cephalanthus occidentalis & $\checkmark$ &  & $\checkmark$ &  \\ 
+23 & Cercis canadensis & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+24 & Chilopsis linearis &  &  & $\checkmark$ &  \\ 
+25 & Clintonia borealis &  &  & $\checkmark$ &  \\ 
+26 & Cornus florida & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+27 & Cornus racemosa & $\checkmark$ &  &  &  \\ 
+28 & Cornus sericea & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+29 & Corylus cornuta* &  &  & $\checkmark$ & $\checkmark$ \\ 
+30 & Diospyros virginiana & $\checkmark$ &  &  &  \\ 
+31 & Fagus grandifolia & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+32 & Fouquieria splendens &  &  & $\checkmark$ &  \\ 
+33 & Fraxinus americana & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+34 & Fraxinus pennsylvanica & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+35 & Gaultheria shallon* &  &  & $\checkmark$ & $\checkmark$ \\ 
+36 & Ginkgo biloba & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+37 & Gleditsia triacanthos & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+38 & Hamamelis virginiana & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+39 & Ilex verticillata & $\checkmark$ &  & $\checkmark$ &  \\ 
+40 & Juglans nigra & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+
+
+\hline
+\end{tabularx}
+\end{table}
+
+% Table C-1 continued, page 3/4
+
+\begin{table}
+\begin{tabularx}{\textwidth}{p{0.5cm}XXXXX}
+\multicolumn{3}{l}{Table \ref{table-c-1}. Continued}\\
+\hline
+& Species & Budburst & Fall Colors & Flowers & Ripe Fruits\\
+\hline
+41 & Liquidambar styraciflua & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+42 & Liriodendron tulipifera & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+43 & Magnolia grandiflora & $\checkmark$ &  & $\checkmark$ &  \\ 
+44 & Maianthemum canadense &  &  & $\checkmark$ &  \\ 
+45 & Nyssa sylvatica & $\checkmark$ &  & $\checkmark$ &  \\ 
+46 & Ostrya virginiana & $\checkmark$ &  & $\checkmark$ &  \\ 
+47 & Oxydendrum arboreum & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+48 & Platanthera praeclara & $\checkmark$ &  & $\checkmark$ &  \\ 
+49 & Platanus racemosa & $\checkmark$ &  & $\checkmark$ &  \\ 
+50 & Populus deltoides & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+51 & Populus fremontii & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+52 & Populus tremuloides & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+53 & Prunus americana & $\checkmark$ &  & $\checkmark$ &  \\ 
+54 & Prunus serotina & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+55 & Prunus virginiana & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+56 & Quercus agrifolia & $\checkmark$ &  & $\checkmark$ &  \\ 
+57 & Quercus alba & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+58 & Quercus douglasii & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+59 & Quercus gambelii & $\checkmark$ & $\checkmark$ &  &  \\ 
+60 & Quercus laurifolia & $\checkmark$ &  &  &  \\ 
+
+
+
+\hline
+\end{tabularx}
+\end{table}
+
+% Table C-1 continued, page 4/4
+
+\begin{table}
+\begin{tabularx}{\textwidth}{p{0.5cm}XXXXX}
+\multicolumn{3}{l}{Table \ref{table-c-1}. Continued}\\
+\hline
+& Species & Budburst & Fall Colors & Flowers & Ripe Fruits\\
+\hline
+61 & Quercus lobata & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+62 & Quercus macrocarpa & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+63 & Quercus palustris & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+64 & Quercus rubra & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+65 & Quercus velutina & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+66 & Quercus virginiana & $\checkmark$ &  & $\checkmark$ &  \\ 
+67 & Rhododendron macrophyllum & $\checkmark$ &  & $\checkmark$ &  \\ 
+68 & Robinia pseudoacacia & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+69 & Salix hookeriana & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+70 & Salix lasiolepis & $\checkmark$ &  & $\checkmark$ &  \\ 
+71 & Sassafras albidum & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+72 & Sorbus americana & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+73 & Tilia americana & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+74 & Ulmus americana & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+75 & Umbellularia californica & $\checkmark$ &  & $\checkmark$ &  \\ 
+76 & Vaccinium corymbosum & $\checkmark$ & $\checkmark$ & $\checkmark$ &  \\ 
+77 & Vaccinium membranaceum* &  &  & $\checkmark$ & $\checkmark$ \\ 
+78 & Yucca brevifolia &  &  & $\checkmark$ &  \\ 
+ & **Total** & **67** & **47** & **72** & **4** \\ 
+
+
+\hline
+\end{tabularx}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%
+%% Table C2 - Species and their associated phenophases evaluated from the 2019 season
+%%%%%%%%%%%%%%%%%
+\newpage
+
+\begin{table}
+    \caption[Species and their associated phenophases evaluated from the 2019 season]{Species and their associated phenophases evaluated from the 2019 season. Numbers indicate the total observations for the species and phenophase, with the mean Julian day in parentheses. Data are from the USA National Phenology Network from Jan. 1, 2019 - May 8, 2019.}
+    \label{table-c-2}
+\begin{tabularx}{\textwidth}{p{0.5cm}XXXXX}
+\hline
+ & Species & Budburst & Fall Colors & Flowers \\ 
+\hline
+
+1 & Acer circinatum & 38 (93.1) &  & 25 (112.4) \\ 
+2 & Acer macrophyllum & 10 (90.6) &  & 6 (94.7) \\ 
+3 & Acer negundo & 14 (98.7) &  & 13 (86.1) \\ 
+4 & Acer pensylvanicum & 6 (93.8) &  & 2 (91) \\ 
+5 & Acer rubrum & 177 (93) &  & 152 (86.1) \\ 
+6 & Acer saccharinum & 10 (107) &  & 6 (99.3) \\ 
+7 & Acer saccharum & 56 (105.5) &  & 30 (109.8) \\ 
+8 & Aesculus californica & 3 (46.3) & 2 (115) & 5 (118.2) \\ 
+9 & Alnus incana & 1 (107) &  &  \\ 
+10 & Alnus rubra & 6 (85.2) &  &  \\ 
+11 & Amelanchier alnifolia & 1 (83) &  &  \\ 
+12 & Betula alleghaniensis & 7 (114.3) &  & 4 (122.5) \\ 
+13 & Betula lenta & 28 (99.2) &  & 11 (106.5) \\ 
+14 & Betula nigra & 1 (104) &  & 1 (87) \\ 
+15 & Betula papyrifera & 5 (112) &  & 6 (113.8) \\ 
+16 & Carpinus caroliniana & 28 (82.1) &  & 20 (80) \\ 
+17 & Carya glabra & 6 (77.2) &  & 5 (112.8) \\ 
+18 & Celtis occidentalis & 4 (105.5) &  &  \\ 
+19 & Cephalanthus occidentalis & 9 (102) &  &  \\ 
+20 & Cercis canadensis & 22 (94.1) &  & 24 (93) \\ 
+21 & Chilopsis linearis &  &  & 4 (119) \\ 
+22 & Cornus florida & 69 (89.7) &  & 56 (101.8) \\ 
+23 & Cornus racemosa & 6 (102.5) &  &  \\ 
+24 & Cornus sericea & 9 (103.4) &  &  \\ 
+25 & Corylus cornuta &  &  & 4 (57.8) \\ 
+
+\hline
+\end{tabularx}
+\end{table}
+
+
+% Table C-2 continued, page 2/3
+
+\begin{table}
+\begin{tabularx}{\textwidth}{p{0.5cm}XXXXX}
+\multicolumn{3}{l}{Table \ref{table-c-2}. Continued}\\
+\hline
+& Species & Budburst & Fall Colors & Flowers\\
+\hline
+
+26 & Diospyros virginiana & 1 (124) &  &  \\ 
+27 & Fagus grandifolia & 45 (100.9) &  & 10 (114.2) \\ 
+28 & Fouquieria splendens &  &  & 9 (97.7) \\ 
+29 & Fraxinus americana & 3 (109.7) &  &  \\ 
+30 & Fraxinus pennsylvanica & 2 (112.5) &  &  \\ 
+31 & Ginkgo biloba & 5 (108.6) &  & 1 (111) \\ 
+32 & Hamamelis virginiana & 23 (104.3) &  &  \\ 
+33 & Ilex verticillata & 3 (115.3) &  &  \\ 
+34 & Juglans nigra & 5 (106.6) &  & 4 (107.2) \\ 
+35 & Liquidambar styraciflua & 18 (75.2) &  & 13 (89) \\ 
+36 & Liriodendron tulipifera & 41 (88.4) &  & 14 (86.2) \\ 
+37 & Magnolia grandiflora & 5 (85.8) &  & 7 (104.7) \\ 
+38 & Nyssa sylvatica & 17 (99) &  & 1 (76) \\ 
+39 & Ostrya virginiana & 4 (91.5) &  &  \\ 
+40 & Oxydendrum arboreum & 8 (98.6) &  & 1 (76) \\ 
+41 & Platanus racemosa & 5 (22) &  & 3 (46) \\ 
+42 & Populus deltoides & 8 (111.8) &  & 5 (110.6) \\ 
+43 & Populus fremontii & 2 (102) &  &  \\ 
+44 & Populus tremuloides & 10 (113) &  & 11 (97.6) \\ 
+45 & Prunus americana & 1 (111) &  & 1 (112) \\ 
+
+\hline
+\end{tabularx}
+\end{table}
+
+
+% Table C-2 continued, page 3/3
+
+\begin{table}
+\begin{tabularx}{\textwidth}{p{0.5cm}XXXXX}
+\multicolumn{3}{l}{Table \ref{table-c-2}. Continued}\\
+\hline
+& Species & Budburst & Fall Colors & Flowers\\
+\hline
+
+46 & Prunus serotina & 30 (84.1) &  & 10 (70.7) \\ 
+47 & Prunus virginiana & 6 (95.2) &  & 1 (107) \\ 
+48 & Quercus agrifolia & 32 (68.7) &  & 12 (83.2) \\ 
+49 & Quercus alba & 32 (100) &  & 14 (112.7) \\ 
+50 & Quercus douglasii & 4 (81.8) &  & 3 (108) \\ 
+51 & Quercus gambelii & 16 (114.2) &  &  \\ 
+52 & Quercus laurifolia & 9 (50.4) &  &  \\ 
+53 & Quercus lobata & 14 (63.9) &  & 4 (81) \\ 
+54 & Quercus macrocarpa & 23 (108.5) &  & 10 (120.5) \\ 
+55 & Quercus palustris & 4 (103) &  & 2 (113) \\ 
+56 & Quercus rubra & 47 (105.8) &  & 24 (112.9) \\ 
+57 & Quercus velutina & 4 (102.8) &  & 3 (106) \\ 
+58 & Quercus virginiana & 10 (58) &  & 11 (66.5) \\ 
+59 & Sassafras albidum & 6 (108) &  & 8 (108) \\ 
+60 & Sorbus americana & 2 (124) &  &  \\ 
+61 & Tilia americana & 7 (101.9) &  &  \\ 
+62 & Ulmus americana & 8 (80.8) &  & 2 (42) \\ 
+63 & Umbellularia californica & 5 (98.8) &  & 5 (54.6) \\ 
+64 & Vaccinium corymbosum & 10 (81.1) &  & 15 (90.4) \\ 
+65 & Yucca brevifolia &  &  & 10 (76.4) \\ 
+ & Total & 991 (93.8) & 2 (115) & 588 (94.8) \\ 
+ 
+\hline
+\end{tabularx}
+\end{table}

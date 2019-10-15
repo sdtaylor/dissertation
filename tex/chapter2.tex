@@ -1,120 +1,171 @@
-\chapter{LITERATURE REVIEW} \label{lit}
+\chapter{COMPARISON OF LARGE-SCALE CITIZEN SCIENCE DATA AND LONG-TERM STUDY DATA FOR PHENOLOGY MODELING}
 
-\section{Dolor Sit Amet}
+\section{Background}
 
- Many of the problems in theses and dissertations involve tables. The UF Graduate Counsel is very specific in the Table Requirements. There should be no vertical lines in tables and only three horizontal lines. No bold text, etc., see the web site for the complete list of requirements. One simple improvement can be incorporated by using tabularx instead of the tabular environment. This allows a table to be stretched the full text width easily, which avoids the centered or left aligned issue. Table \ref{first} is an examble of the tabularx code. Consectetur adipiscing elit. Fusce eget tempus lectus, non porttitor tellus. Aliquam molestie sed urna quis convallis. Aenean nibh eros, aliquam non eros in, tempus lacinia justo. In magna sapien, blandit a faucibus ac, scelerisque nec purus.
- 
- \begin{table}[htbp]
-    \caption{A sample Table}\label{first}
-    \begin{tabularx}{6.5in}{XXX}
-      \hline
-      First & Second & Third \\
-      \hline
-      12 & 45 & 26 \\
-      17 & 32 & 93 \\
-      text & 51 & can be there too. \\	
-      \epsfig{figure=images/cat.eps, scale=1} & 28 & Figures too - a cat. \\
-      \begin{turn}{0}\epsfig{figure=images/mouse.eps, scale=0.25}\end{turn} & 000 & and a mouse! \\
-      \hline
-    \end{tabularx}
-\end{table}
- 
- 
- Praesent fermentum felis nec massa interdum, vel dapibus mi luctus. Cras id fringilla mauris. Ut molestie eros mi, ut hendrerit nulla tempor et. Pellentesque tortor quam, mattis a scelerisque nec, euismod et odio. Mauris rhoncus metus sit amet risus mattis, eu mattis sem interdum.
+Many plant phenology studies use intensively collected datasets from a single location over a long time-period by a single research group \citep{cook2012, wolkovich2012, iler2013, roberts2015}. These datasets have regular sampling and large numbers of samples over long periods of time. As a result, the biological and climatic variability at that site is well represented. It is common for phenology models built with observations from a single site to not transfer well to other sites \citep{garcia-mozo2008, xu2013, olsson2014, basler2016}. This lack of transferability can be driven by plasticity in phenology requirements, local adaptation, microclimates, or differences in plant age or population density \citep{kramer1995, diez2012}. For these reasons, data from a single location are not adequate for larger scale phenology modeling. Accurately forecasting phenology at larger scales will require models that account for the full range of variation across a species' range \citep{richardson2013, tang2016, chuine2017}, which will necessitate the use of data sources beyond traditional single-site studies. \renewcommand*{\thefootnote}{}\footnote{Reprinted with permission from Taylor, S. D., J. M. Meiners, K. Riemer, M. C. Orr, and E. P. White. 2019. Comparison of large-scale citizen science data and long-term study data for phenology modeling. Ecology 100:e02568. http://doi.wiley.com/10.1002/ecy.2568}
 
-\subsection{Platea Dictumst}
-Donec convallis scelerisque ante, in sollicitudin orci laoreet eu. Nam arcu magna, semper vel lorem eu, venenatis ultrices est. Nam aliquet ut erat ac scelerisque. Maecenas ut molestie mi. Phasellus ipsum magna, sollicitudin eu ipsum quis, imperdiet cursus turpis. Etiam pretium enim a fermentum accumsan. Morbi vel vehicula enim.
+Data from citizen science projects are becoming increasingly important for ecological research \citep{kelling2009, dickinson2010, tulloch2013}. Because these data are often collected by large numbers of volunteers, it is possible to gather data at much larger scales than with individual research teams. A relatively new citizen science project started in 2009, Nature's Notebook run by The USA National Phenology Network (USA-NPN), collects phenology observations from volunteers throughout the United States and makes the data openly available \citep{npncitation}. Data from this project have already been used to study variation in oak phenology at a continental scale \citep{gerst2017}, develop large-scale community phenology models \citep{melaas2016}, and forecast long-term phenology trends \citep{jeong2013}. Large-scale datasets from China and Europe have already contributed considerably to phenological research \citep{xu2013, olsson2014, basler2016, zhang2017}, and the USA-NPN dataset has the potential to meet these needs for North American plant species and communities. However, the features that allow citizen science projects to collect data at large scales can also introduce spatial biases toward cities and easily-accessible areas, and variation in sampling effort and observer skill \citep{dickinson2010}. With thousands of participants, the potential for variation among observers in their determination of species identification and dating of phenological events is high. While volunteers have been shown to be accurate at distinguishing different leaf and flower stages for plants \citep{fuccillo2015} and can have high agreement on abundance estimates \citep{feldman2018}, contributions to USA-NPN are sometimes made sporadically across seasons, years, and locations. This means that the quantity and quality of data at a specific site will typically be more variable for citizen science efforts than for intensive, long-term studies.
 
+In order to accurately model and forecast phenology, it is important to understand how the strengths and weaknesses of intensive local studies and large-scale citizen science projects influence both our inferences about biological processes driving phenology (e.g. warming requirements for a specific plant) and our ability to predict future phenology events (e.g. forecasting when flowering or leaf out occurs). Here, we fit a suite of plant phenology models for the budburst and first-flowering phenophases of 24 plant species to data from both the USA-NPN and a set of intensive long-term studies from the Long Term Ecological Research (LTER) network. We compare the resulting models based on both inference about models and parameters and predictions for unobserved events. We then use this comparison to assess the best methods for both local- and large-scale phenology modeling and to point the way forward for integrating large-scale and local-scale data to determine the best possible models across scales.
 
-\subsection{Long (and/or Wide) Tables}
+\section{Methods}
 
-Another problem in LaTeX is the inability to handle long tables. While there are some packages that address this problem none of them quite fit the Editorial Office guidelines. The caption is not repeated but we do need "Table x-y. Continued" on each subsequent page and a repeat of the column headings on each page as well. The following table is the best example of the correct format I can produce. The disadvantage of this method is that much of it is manually set up and changes in the text will cause changes in the table. \citep{Moffatt69} For best results avoid the use of footnotemark and footnotetext commands inside of tables and try to keep your footnotes outside of floats whenever possible.
+\subsection{Datasets}
 
+The USA National Phenology Network (USA-NPN) protocol uses status-based monitoring, where via a phone app or web based interface observers answer 'yes,' 'no,' or 'unsure' when asked if an individual plant has a specific phenophase present \citep{denny2014}. Phenophases refer to specific phases in the annual cycle of a plant, such as the presence of emerging leaves, flowers, fruit, or senescing leaves. Sites in the USA-NPN datasets are located across the U.S. and generally clustered around populated areas (Figure \ref{fig-2-1}). To represent long-term, intensive phenology studies we used four datasets from North America representing three major ecosystem types (Table \ref{table-2-1}, Figure \ref{fig-2-1}). All four long-term studies are located in the U.S. and are part of the Long Term Ecological Research network (LTER). The Harvard Forest and Hubbard Brook Long Term Experimental Forest are located in the northeastern U.S. and are dominated by deciduous broadleaf species. The H.J. Andrews Experimental Forest is a coniferous forest in the coastal range of the western U.S. The Jornada Experimental Range is in the Chihuahua desert of the southwestern U.S. 
 
+We downloaded all USA-NPN observations from 2009, when collections began, to 2016 for the following phenophases: Breaking Leaf Buds, Breaking Needle Buds, Emerging Needles, and Open Flowers \citep{npndata}. The first three phenophases apply to the 'leaf out' phase for deciduous broadleafs, evergreen conifers, and pines, respectively. The 'Open Flowers' phenophase refers to fully-open flowers and applies to all angiosperms. Hereafter, we will refer to these as either 'Flowers' for the Open Flower phenophase, or 'Budburst' for all other phenophases. We subset the USA-NPN observations similar to methods outlined in \cite{crimmins2017}. First, 'yes' observations for individual plants were kept only if they were preceded by a 'no' observation within 30 days. Observations for 'Budburst' that were past day of year (DOY) 172, and for 'Flowers' that were past DOY 213 were dropped to minimize any influence from outliers. We inferred the observed DOY of each phenophase as the midpoint between each 'yes' observation and the preceding 'no' observation. Finally, only species that had greater than 30 total observations were kept. \cite{crimmins2017} only kept observations that were preceded by a 'no' within 15 days, and also grouped multiple individuals at single sites to a single observation. We used 30 days to allow for a greater number of species to be compared. We tested the sensitivity of this choice by also performing the analysis using a 15 day cutoff. We chose not to group multiple individuals at a single site to better incorporate intra-site variability.
+
+In the LTER datasets observation metrics varied widely due to different protocols. To match the USA-NPN data we converted all metrics to binary 'yes' and 'no' observations for each phenophase (see \ref{appendix-a} for details). Three of the LTER datasets (Hubbard Brook, Harvard Forest, and H.J. Andrews) had a sampling frequency of 3-7 days during the growing season. The Jornada dataset had a sampling frequency of 30 days. As with the USA-NPN data, we inferred the date for each phenophase as the midpoint between the first 'yes' observation and most recent 'no' observation, and only kept species and phenophase combinations which had at least 30 total observations. After data processing there were 38 species and phenophase combinations (with 24 unique species) common to both the USA-NPN and LTER datasets to use in the analysis (Table \ref{table-2-1} \& Table \ref{table-a-1}). Using a 15 day cutoff in the USA-NPN dataset resulted in 35 unique combinations with 23 species.
+
+\subsection{Models}
+
+It is common to fit multiple plant phenology models to find the one that best represents a specific species and phenophase \citep{chuine2013}. For each of the 38 species and phenophase combinations in the five datasets (USA-NPN and four LTER datasets), we fit eight phenology models (Table \ref{table-2-2}). The Naive model uses the mean DOY from prior observations as the estimated DOY. The Linear model uses a regression with the mean spring (Jan. 1 - March 31) temperature as the independent variable and DOY as the response variable. For the six remaining models, the general form is based on the idea that a phenological event will occur once sufficient thermal forcing units, $F^{*}$, accumulate from a particular start day of the year ($t_{1}$). Forcing units are a transformation of the daily mean temperature and are calculated differently for each model (Table \ref{table-2-2}). The start day can either be estimated or fixed. For the Growing Degree Day (GDD) model, forcing units are the total degrees above the threshold $T_{base}$ \citep{reaumur1735, wang1960, hunter1992}. The Fixed GDD model uses the same form but has fixed values for start day ($t_{1}$ = Jan 1) and temperature threshold ($T_{base}$ = 0$^{\circ}$C). The Alternating model has a variable number of required forcing units defined as a function of the total number of days below 0$^{\circ}$C since Jan. 1 (number of chill days - $NCD$). The Uniforc model is like the GDD model but with the forcing units transformed via a sigmoid function \citep{chuine2000}. 
+
+We also fit two models that attempt to capture spatial variation in phenological requirements. The first spatial model, M1, is an extension of the GDD model which adds a correction in the required forcing using the photoperiod ($L$) \citep{blumel2012}. The second, the Macroscale Species-specific Budburst model (MSB), uses the mean spring temperature as a linear correction on the total forcing required in the Alternating model \citep{jeong2013}. Since there is little to no spatial variation in the LTER datasets, we fit the two spatial models to data from the USA-NPN only. We compared the resulting parameters, estimates, and errors for the USA-NPN derived M1 and MSB models to their non-spatial analogs (the GDD and Alternating models, respectively) for each species and phenophase in the LTER data.  
+
+We extracted corresponding daily mean temperature for all USA-NPN and LTER observations from the gridded PRISM dataset using the latitude and longitude of the site associated with each observation \citep{prismdata}. We parameterized all models using differential evolution to minimize the root mean square error (RMSE) of the estimated DOY of the phenological event. Differential evolution is a global optimization algorithm which uses a population of randomly initialized models to find the set of parameters that minimize the RMSE \citep{storn1997}. Confidence intervals for parameters were obtained by bootstrapping, in which individual models were re-fit 250 times using a random sample, with replacement, of the data. We made predictions by taking the mean DOY estimated from the 250 bootstrapped iterations. A random subset consisting of 20\% of observations from each species and phenophase combination was held out from model fitting for later evaluation.
+
+\subsection{Analysis}
+
+As described above, we fit two sets of models for each species and phenophase: one set of models parameterized using only USA-NPN data, and one set parameterized using only LTER data (with the exception of the M1 and MSB models, see above). We performed three primary analyses from these model outputs by comparing: 1) the model parameters, 2) estimates from the models, and 3) out-of-sample errors from each model.
+
+To compare the inferences about process made by the two datasets, we compared the distribution of each parameter between LTER and USA-NPN derived models for each species and phenophase combination. Using the mean value of each bootstrapped parameter, we also calculated the coefficient of determination ($R^2$) between LTER and USA-NPN derived models among the 38 species-phenophases. In three cases where a species phenophase combination occurred in two LTER sites (Budburst for \textit{Acer saccharum}, \textit{Betula alleghaniensis}, and \textit{Fagus grandifolia} in the Harvard and Hubbard Brook datasets) they were compared separately to the USA-NPN data.
+
+Next we compared the estimates of phenological events between models. Models with different parameter values, and even entirely different structures, can produce similar estimates for the date of phenological events \citep{basler2016}. Therefore, to compare the predictions and potential forecasts for models fit to the different datasets, we compared the estimated DOY predicted by the LTER and USA-NPN derived models for all held out observations. For each of the eight models, we calculated the coefficient of determination ($R^2$) between LTER and USA-NPN derived estimates for estimates made at the four LTER sites and across all USA-NPN sites.  
+
+Finally, we directly evaluated performance using out-of-sample errors from the four combinations of models and observed data: A) LTER-derived models predicting LTER observations, B) USA-NPN derived models predicting LTER observations, C) LTER-derived models predicting USA-NPN observations, and D) USA-NPN derived models predicting USA-NPN observations. Using the RMSE values from held out observations, we compared the performance of LTER and USA-NPN derived models on different data types in two different ways. First, we focused on local-scale prediction by calculating the difference in the RMSE of LTER and USA-NPN derived models solely with LTER observations. Secondly, to focus on large-scale prediction we calculated the difference in RMSE using solely USA-NPN data. These differences were calculated for each of the model types and 38 species-phenophase combinations. Negative values indicate that LTER-derived models perform better, while positive values indicate that the USA-NPN derived model performed better. We used a t-test to test the difference from zero in these values. In the three cases where the same species and phenophase combination occurred in two LTER sites, we made the LTER-LTER comparison within each site, not across sites, to focus on local scale prediction when LTER data are available. Absolute RMSE values as well as Pearson correlation coefficients are provided in the supplement for specific species (Figure \ref{fig-a-5},\ref{fig-a-6},\ref{fig-a-7}) and with all observations aggregated together (Table \ref{table-a-2}).
+
+We performed all analysis using both the R and Python programming languages \citep{rcitation, python}. Primary R packages used in the analysis included dplyr \citep{dplyr}, tidyr \citep{tidyr}, ggplot2 \citep{ggplot2}, lubridate \citep{lubridate}, prism \citep{prismR}, raster \citep{rasterR}, and sp \citep{sp1}. Primary Python packages included SciPy \citep{scipy}, NumPy \citep{numpy}, Pandas \citep{pandas}, and MPI for Python \citep{mpi4py}. Code to fully reproduce this analysis is archived on Zenodo (\href{https://doi.org/10.5281/zenodo.1256705}{https://doi.org/10.5281/zenodo.1256705})
+
+\section{Results}
+
+Throughout the analysis there were no qualitative differences between a 30-day or 15-day threshold between the first 'yes' and most recent 'no' observation in the USA-NPN dataset. Results presented here reflect the 30 day cutoff; see the figures \ref{fig-a-2},\ref{fig-a-3},and \ref{fig-a-4} for matching figures using a 15 day cutoff. 
+
+The best matches between parameter estimates based on USA-NPN and LTER data were the Fixed GDD model ($R^2$ = 0.49) and the Linear model ($R^2$ = 0.39 for $\beta_{1}$ and -0.05 for $\beta_{2}$). The parameters for all other models had $R^2$ values \textless 0 indicating that the relationship was worse than no relationship between the parameters (but with matching mean parameter values across the two sets of models) (Figure \ref{fig-2-2}). The Naive model showed a distinct late bias in mean DOY estimates for phenological events, likely resulting from the LTER datasets being mostly in the northern United States compared to the site locations of the USA-NPN dataset (Figure \ref{fig-2-2}). The large outlier for the Fixed GDD model is \textit{Larrea tridentata}; this species' flower phenology is largely driven by precipitation, which is not considered in the Fixed GDD model \citep{beatley1974}. While the Fixed GDD and Linear models showed reasonable correspondence between parameter estimates, all parameters for individual species and phenophase combinations had different distributions between USA-NPN and LTER-derived models (Figures \ref{fig-a-10},\ref{fig-a-11}).
+
+When comparing estimates of phenological events between the two sets of models, many USA-NPN and LTER models produced similar estimates (Figure \ref{fig-2-3}). The Fixed GDD model had the highest correlation between the two model sets at USA-NPN sites ($R^2 = 0.82$), while the GDD, M1, and Uniforc models had the highest correlation at LTER sites ($R^2 =$ 0.51, 0.52, and 0.51, respectively). Comparing models with spatial corrections to the non-spatial alternatives, the MSB (an extension of the Alternating model with a spatial correction based on mean spring temperature, see Table \ref{table-2-2} and Methods) improved the correlation between the two datasets over the Alternating model. The MSB model improved the $R^2$ from 0.36 to 0.45 at LTER sites, and from -0.23 to -0.15 at USA-NPN sites. The M1 model (an extension of the GDD model with a spatial correction based on day length) improved the correlation over the GDD model only slightly at LTER sites (from 0.51 to 0.52) and did not improve the correlation at USA-NPN sites. 
+
+When comparing the predictive performance using out-of-sample errors, USA-NPN derived models made more accurate predictions for held-out USA-NPN observations, and LTER-derived models performed better on held-out LTER observations ( all \textit{p} < 0.001, Figure \ref{fig-2-4}). The Naive and Linear models had the largest differences between the two model sets, while the Fixed GDD model had relatively similar errors when evaluated on both USA-NPN and LTER held-out observations. Although the Fixed GDD model had the highest agreement in accuracy between USA-NPN and LTER-derived models, it was not the best performing model overall. The GDD and Uniforc models made the best out of sample predictions, having the lowest RMSE and Pearson coefficient when aggregating all observations together ( Table \ref{table-a-2}). One exception was that the Fixed GDD model had a slightly higher Pearson value when using LTER-derived models to make predictions for USA-NPN data. The best model for specific species and phenophases varied, but was commonly the Uniforc or GDD models (Figures \ref{fig-a-5},\ref{fig-a-6}).
+
+\section{Discussion}
+
+Data used to build phenology models typically fall into two categories: intensive long-term data with long time-series at a small number of locations (e.g., LTER data in this study), and large-scale data with less intensive sampling at hundreds of locations (e.g., USA-NPN data) (Table \ref{table-2-3}). This data scenario--a small amount of intensive data and a large amount of less intensive data--is common in many areas of science and makes it necessary to understand how to choose between, or combine, data sources \citep{hanks2018}. We explored this issue for phenology modeling in relation to making predictions and inferring process from models. For inference we found that models based on different data sources resulted in different parameter estimates for all but the simplest models. For prediction we found that models fit to different data sources tended to make similar predictions, but that models better predicted out-of-sample data from the data type to which they were fit. These results are consistent with other research showing that phenology model performance decreases when transferring single-site models to other locations \citep{garcia-mozo2008, xu2013, basler2016}, and with the call for models that better incorporate spatial variation in phenology requirements \citep{richardson2013, chuine2017}. Understanding and making predictions for the phenology of a single location is best served by intensive local-scale data, when available, but large-scale datasets work better for extrapolating phenology predictions across a species range. Thus, the best choice of both data and models depends on the desired research goals.
+
+In this study, parameter estimates differed widely within the same phenology model when fit to the two different types of data, except for the simplest process-oriented model: the Fixed GDD (Figure \ref{fig-2-2}). These differences may be caused by a variety of factors that have different implications for interpreting process-oriented models and their parameters. First, the differences could result from limitations in the sampling of the USA-NPN dataset, such as irregular sampling of the same location within or between seasons, leading to less accurate parameter estimates. If this is the case, it would suggest that using LTER data is ideal for making inferences about plant physiology, and that focusing on the Fixed GDD model is best for making inferences when USA-NPN data are all that is available. Second, spatial variation (e.g. from local adaptation, acclimation, microclimates, or plant age)  in phenology requirements and drivers could contribute to these differences \citep{diez2012, zhang2017}. Models built using USA-NPN data integrate over that spatial variation, while models built using LTER data only estimate the phenological requirements for a specific site. In this case, USA-NPN data would provide a better estimate of the general phenological requirements of a species, but LTER data would provide a more accurate understanding for a single site. The best solution to this issue would be the development of models that accurately incorporate spatial variation, such as including genetic variation between different populations \citep{chuine2017}, although localized models could also be generated when large-scale predictions are unnecessary. Third, these differences could result from issues with model identifiability: since different parameter values can yield nearly identical estimates of phenological events, parameter estimates can differ between datasets even when the underlying processes generating the data are the same. Information about which of these issues may be causing the differences between datasets can be explored using the analyses in the current study, as will be explained below.
+
+Despite substantial differences in parameter estimates, LTER and USA-NPN derived models produced similar estimates for phenological events in most cases (Figure \ref{fig-2-3}). This greater correspondence between predictions than parameters suggests that more complex models may have identifiability issues. For example, two GDD models with parameters of $t_{1}$=1, $F$=10, $T_{base}$=0 and $t_{1}$=5, $F$=5, $T_{base}$=0 produce nearly identical estimates in many scenarios. This possibility is supported by the fact that the highest correlation between parameter estimates is seen in models with only 1 or 2 parameters. In addition, bootstrap results for more complex models suggest a high degree of variability in parameter estimates and potentially multiple local optima in fits to both USA-NPN and LTER data (Figures \ref{fig-a-10},\ref{fig-a-11}). Finally, parameter estimates of more complex models are also not consistent among models for the same species when comparing multiple LTER datasets (Figures \ref{fig-a-8},\ref{fig-a-9}). These results are consistent with research showing that models failed to estimate the starting day of warming accumulation solely from budbreak time-series, thus producing parameter estimates that were not biologically realistic \citep{chuine2016}. \cite{basler2016} suggests that the key component in phenology models is the thermal forcing, with additional parameters being sensitive to over-fitting. Here, our simplest model, the Fixed GDD model which uses only a warming component, had the highest correlation among parameters between LTER and USA-NPN datasets. In combination with the aforementioned studies, our results indicate that caution is warranted in interpreting parameter estimates from complex phenology models regardless of the data source used for fitting the models.
+
+While more complex phenology models appear to have identifiability issues, there is also evidence that they capture useful information, beyond the Fixed GDD model, based on their ability to make out-of-sample predictions. Based on the RMSE, the GDD and Uniforc models produce the best out-of-sample predictions for the majority of species and phenophases at both USA-NPN and LTER datasets (Figures \ref{fig-a-5},\ref{fig-a-6}). This demonstrates that the more complex models are capturing additional information about phenology, and that some of the differences between datasets result from differences in either the scales or the sampling of the data. Spatial variation in phenological requirements is known to exist in plants \citep{zhang2017}. In combination with our results showing observed differences in parameter estimates between LTER sites (Figures \ref{fig-a-8},\ref{fig-a-9}), this suggests that variation in phenological requirements across the range is likely important. However, the models that attempted to address this by incorporating spatial variation did not yield improvements over their base models in our analyses. Specifically, correspondence between parameter estimates (Figure \ref{fig-2-2}), estimates of phenological events (Figure \ref{fig-2-3}), and out-of-sample error rates (Figure \ref{fig-2-4}) for the MSB and M1 models were essentially the same as the Alternating and GDD models, respectively. This lack of improvement from incorporating spatial variation could be caused either by models not adequately capturing the process driving the spatial variation, the USA-NPN dataset having biases from variation in sampling effort and/or spatial auto-correlation, or some combination of these factors. \cite{basler2016} used the M1 model to predict budburst for six species across Europe and found it was generally among the best models in terms of RMSE, albeit never by more than a single day. Their result was strengthened by having a 40-year time-series across a large region. \cite{chuine2017} listed the incorporation of spatial variation in warming requirements in models as a primary issue in future phenology research. Large-scale phenology datasets, like USA-NPN, will be key in addressing this and other phenological research needs.
+
+In addition to exploring differences between phenology datasets, our analyses provide guidance on which models to use when making predictions at a local scale using models built from large-scale data, or vice versa. Among the eight models tested, the Uniforc and GDD models performed the best overall in the cross dataset comparison in terms of Pearson correlation and RMSE (Figures \ref{fig-a-5},\ref{fig-a-6}, Table\ref{table-a-2}). The GDD model has one less parameter than the Uniforc model, thus the GDD model is a suitable choice for making predictions when there is little to no information at the location of interest (e.g. making phenology forecasts at a new location distant from any observed data). This guidance can vary between species, though, and model testing should still be performed when suitable data are available.
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Begin tables and figures
+%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%
+%% Figure 1 the map
+%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}
+	\centering
+	%\includegraphics[scale=0.6]{images/figure_2-1_site_map.png}
+	\includegraphics[scale=0.3]{images/figure_filler.jpg}
+	\caption[Locations of Locations of U.S.A. National Phenology Network and Long Term Ecological Research sites]{Locations of Locations of U.S.A. National Phenology Network and Long Term Ecological Research sites. U.S.A. National Phenology Network sites used are shown as black points and Long Term Ecological Research sites as labeled circles, with greyscale showing elevation.} \label{fig-2-1}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%% Figure 2 parameter comparison
+%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}
+	\centering
+		%\includegraphics[scale=0.6]{images/figure_2-2_param_comparison_final.png}
+		\includegraphics[scale=0.3]{images/figure_filler.jpg}
+    \caption[Comparisons of parameter estimates between USA-NPN and LTER derived models]{Comparisons of parameter estimates between USA-NPN and LTER derived models. Each point represents a parameter value for a specific species and phenophase, and is the mean value from 250 bootstrap iterations. The black line is the 1:1 line.} \label{fig-2-2}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%% Figure 3, estimate comparison (1:1 graphs w/ yellow and
+%% green points
+%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}
+	\centering
+		%\includegraphics[scale=0.4]{images/figure_2-3_estimate_compare.png}
+		\includegraphics[scale=0.3]{images/figure_filler.jpg}
+	\caption[Comparison of predicted day of year (DOY) of all phenological events between USA-NPN and LTER-derived models]{Comparison of predicted day of year (DOY) of all phenological events between USA-NPN and LTER-derived models. Top panels show comparisons at LTER sites and bottom panels show comparisons at USA-NPN sites. Each point is an estimate for a single held-out observation. Colors indicate observations for a single species and phenophase combination.} \label{fig-2-3}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%% Figure 4  error comparison (2 rows of density plots)
+%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}
+	\centering
+		%\includegraphics[scale=0.3]{images/figure_2-4_rmse_metrics_density_plot.png}
+		\includegraphics[scale=0.3]{images/figure_filler.jpg}
+	\caption[Differences in prediction error between USA-NPN and LTER-derived models]{Differences in prediction error between USA-NPN and LTER-derived models. Density plots for comparisons of predictions on LTER data (top row) and USA-NPN data (bottom row). Each plot represents the difference between the RMSE for LTER-derived model and the USA-NPN derived model, meaning that values less than zero indicate more accurate prediction by LTER-derived models and values greater than zero indicate more accurate prediction by NPN-derived models. \textit{p} <0.001 for all t-tests. Differences are calculated pairwise for the 38 species/phenophase comparisons.} \label{fig-2-4}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%
+%% Table 1, the 4 LTER datasets
+%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{table}
-\caption{Feasible triples for highly variable Grid, MLMMH.} \label{tbl1}
-\begin{tabularx}{6.5 in}{r l X}
-\hline {{Time (s)}} & {{Triple chosen}} & {{Other feasible triples}} \\ \hline
-0 & (1, 11, 13725) & (1, 12, 10980), (1, 13, 8235), (2, 2, 0), (3, 1, 0) \\
-2745 & (1, 12, 10980) & (1, 13, 8235), (2, 2, 0), (2, 3, 0), (3, 1, 0) \\
-5490 & (1, 12, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-8235 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-10980 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-13725 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-16470 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-19215 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-21960 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-24705 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-27450 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-30195 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-32940 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-35685 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-38430 & (1, 13, 10980) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-41175 & (1, 12, 13725) & (1, 13, 10980), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-43920 & (1, 13, 10980) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-46665 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-49410 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-52155 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-54900 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-57645 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-60390 & (1, 12, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-63135 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-65880 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-68625 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-71370 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-74115 & (1, 12, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-76860 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-79605 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-82350 & (1, 12, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-85095 & (1, 12, 13725) & (1, 13, 10980), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-87840 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-90585 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-93330 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-96075 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-98820 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-101565 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-104310 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-107055 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-109800 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-112545 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-\hline
-\end{tabularx}
+    \caption[LTER datasets used in the analysis]{LTER datasets used in the analysis.} \label{table-2-1}
+    \begin{tabularx}{6.5in}{XXXX}
+    \hline
+    Dataset Name & Habitat &  Phenological Event (Num. Species) & Reference \\ \hline
+    Harvard Forest & N.E. Deciduous Forest & Budburst (17) Flowering (7) & \citep{okeefe2015} \\
+    Jornada Experimental Range & Chihuahuan Desert & Flowering (2) &  \\
+    H.J. Andrews Experimental Forest & N.W. Wet Coniferous Forest & Budburst (5) Flowering (4) & \citep{schulze2017} \\
+    Hubbard Brook & N.E. Deciduous Forest & Budburst (3) & \citep{bailey2018} \\
+    \hline
+    \end{tabularx}
 \end{table}
 
-\begin{table}[h!t!]
-\begin{tabularx}{6.5 in}{r l X}
-\multicolumn{3}{l}{Table \ref{tbl1}. Continued}\\%
-\hline {{Time (s)}} & {{Triple chosen}} & {{Other feasible triples}} \\ \hline
-115290 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-118035 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-120780 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-123525 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-126270 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-129015 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-131760 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-134505 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-137250 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-139995 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-142740 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-145485 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0)\\%
-148230 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-150975 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-153720 & (1, 12, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-156465 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-159210 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-161955 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-164700 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-\hline
-\end{tabularx}
+%%%%%%%%%%%%%%%%%%%%%%
+%% Table 2, the 8 phenology models
+%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+
+\begin{table}
+    \caption[Phenology models used in the analysis]{Phenology models used in the analysis. For all models, except the Naive and Linear models, the daily mean temperature $T_{i}$ is first transformed via the specified forcing equation. The cumulative sum of forcing is then calculated from a specific start date (either $DOY=1$ or using the fitted parameter $t_{1}$). The phenological event is estimated as the $DOY$ in which cumulative forcing is greater than or equal to the specified total required forcing (either $F^{*}$ or the specified equation). Parameters for each model are as follows: For the Naive model $\overline{DOY}$ is the mean day of year (ie. the Julian date) of a phenological event; for the Linear model $\beta_{1}$ and $\beta_{2}$ are the intercept and slope, respectively and $T_{mean}$ is the average daily temperature between January 1 and March 31; for the GDD model $F^{*}$ is the total accumulated forcing required, $t_{1}$ is the start date of forcing accumulation, and $T_{base}$ is the threshold daily mean temperature above which forcing accumulates; for the Fixed GDD model $F^{*}$ is the total accumulated forcing required; for the Alternating model $NCD$ is the number of chill days (daily mean temperature below 0$^{\circ}$C) from $DOY=0$ to the $DOY$ of the phenological event, $a$, $b$, and $c$ are the three fitted model coefficients; for the Uniforc model, is $F^{*}$ is the total accumulated forcing required, $t_{1}$ is the start date of forcing accumulation, and $b$ and $c$ are two additional fitted parameters which define the sigmoid function; the M1 model is the same as the GDD model, but with the additional fitted parameter $k$ that adjusts the total forcing accumulation according to day length; the MSB model is the same as the Alternating model, but with the additional fitted parameter $d$ to correct the model according to mean spring temperature.} \label{table-2-2}
+    \begin{tabularx}{6.5in}{XXXXX}
+    \hline
+    Name & DOY Estimator & Forcing Equations & Total\newline Parameters & Reference \\ \hline
+    Naive & \( \overline{DOY} \) & - & 1 & - \\
+    Linear & \( DOY = \beta_{1} + \beta_{2}T_{mean} \) & - & 2 & - \\
+    GDD & $\sum_{t=t_{1}}^{DOY}R_{f}(T_{i})\geq F^{*} $ & $ R_{f}(T_{i}) = max(T_{i} - T_{base}, 0) $  & 3 & \citep{reaumur1735, wang1960, hunter1992} \\
+    Fixed GDD &$\sum_{t=1}^{DOY}R_{f}(T_{i})\geq F^{*} $  & $R_{f}(T_{i}) = max(T_{i}, 0)$ & 1 & \citep{reaumur1735, wang1960, hunter1992} \\
+    Alternating & $\sum_{t=1}^{DOY}R_{f}(T_{i})\geq a + be^{cNCD(t)} $ & $R_{f}(T_{i}) = max(T_{i}-5, 0) $ & 3 & \citep{cannell1983} \\
+    Uniforc &  $\sum_{t=t_{1}}^{DOY}R_{f}(T_{i})\geq F^{*} $ & $ R_{f}(T_{i}) = \frac{1}{1 + e^{b(T_{i}-c)}} $ & 4 & \citep{chuine2000} \\
+    M1 & $\sum_{t=t_{1}}^{DOY}R_{f}(T_{i})\geq (\frac{L_{i}}{24})^{k} F^{*} $ & $ R_{f}(T_{i}) = max(T_{i}-T_{base}, 5) $  & 4 & \citep{blumel2012} \\
+    MSB & $\sum_{t=1}^{DOY}R_{f}(T_{i})\geq a + be^{cNCD_{i}} +dT_{mean} $ & $R_{f}(T_{i}) = max(T_{i}-5, 0) $ & 4 & \citep{jeong2013} \\
+    \hline
+    \end{tabularx}
 \end{table}
 
-\section{Ex id ullamcorper commodo}
-Augue sapien mattis leo, nec accumsan turpis quam at neque. Ut pellentesque velit sed placerat cursus. Integer congue urna non massa dictum, a pellentesque arcu accumsan. Nulla posuere, elit accumsan eleifend elementum, ipsum massa tristique metus, in ornare neque nisl sed odio. Nullam eget elementum nisi. Duis a consectetur erat, sit amet malesuada sapien. Aliquam nec sapien et leo sagittis porttitor at ut lacus. Vivamus vulputate elit vitae libero condimentum dictum. Nulla facilisi. Quisque non nibh et massa ullamcorper iaculis.
+%%%%%%%%%%%%%%%%%%%%%%
+%% Table 3, differences between LTER and USA-NPN
+%%%%%%%%%%%%%%%%%%%%%%
 
-Integer laoreet bibendum arcu non pulvinar. Curabitur ac magna nibh. Phasellus sed nisi semper, molestie neque at, tempus lacus. Aenean vitae lacinia est. Phasellus aliquam lacus sit amet placerat molestie. Sed sit amet bibendum lectus, ac ornare ligula. Curabitur porttitor interdum tortor a dignissim. Quisque a placerat nibh. Phasellus lobortis imperdiet augue, non congue est bibendum eu. Vivamus tincidunt quam eu fringilla laoreet.
-
-Maecenas efficitur dolor et ipsum convallis, ut fringilla neque luctus. Donec ac nisl quis leo gravida accumsan sit amet sed tellus. Quisque placerat hendrerit augue sit amet aliquet. Vestibulum laoreet consequat nunc, et egestas nisl auctor et. Duis scelerisque vulputate placerat. Proin tempus ligula ac tempor eleifend. Nullam est odio, commodo quis nisl eu, feugiat efficitur purus.
-
-Duis egestas in mauris vel efficitur. Sed a faucibus sem, non euismod enim. Maecenas nec nulla justo. Suspendisse ut orci ac mi aliquet tincidunt ac eget quam. Quisque ac mi sagittis, dapibus dui a, facilisis neque. Aenean euismod orci sem, non imperdiet ipsum pulvinar ac. Proin eu vestibulum magna, eu ullamcorper nulla. Etiam enim felis, dignissim eget commodo ac, faucibus nec justo. Nulla condimentum velit imperdiet ligula aliquam semper. Nulla facilisi. Ut in lobortis metus, at dictum ipsum. Suspendisse facilisis nec eros eget mollis. Vestibulum eget dolor ac mauris lobortis gravida. Suspendisse consectetur orci in risus pharetra, sed eleifend nisl lacinia. Mauris augue nibh, commodo sed sem at, congue molestie massa. Suspendisse sodales aliquet tellus, a tristique nunc aliquam id.
-
+\begin{table}
+    \caption[Attributes of the two datasets used in this study]{Attributes of the two datasets used in this study. Bold text indicates an attribute is expected to increase over time.} \label{table-2-3}
+    \begin{tabularx}{6.5in}{XXX}
+    \hline
+                                    & LTER  & USA-NPN           \\
+    \hline
+    Time-series length                          & \textbf{High} & \textbf{Low}  \\
+    Spatial extent                              & Low           & \textbf{High} \\
+    Local species representation                & High          & Low           \\
+    Regional/Continental species representation & Low           & \textbf{High} \\
+    Number of observers                         & \textbf{Low}  & \textbf{High} \\
+    Site fidelity                               & High          & Low          
+    \end{tabularx}
+\end{table}
