@@ -1,0 +1,31 @@
+% The Editorial Office Requirements for the Table of Contents cause a significant problem
+%in Latex if there is only one Appendix. The Appendix is no longer labeled "A" in the TOC
+%but has the word "APPENDIX" placed in front of the title of the Appendix. This can be done
+%without issue IF nothing needs to be numbered by LaTeX in the Appendix. Unfortunately, most of the time
+%something needs to be numbered in that single Appendix. For this reason we have included the IFTHENELSE switch
+%found in this document and at the beginning of AppendixA. We assume that if you have any appendices, that you have more than one. However, you DO only have one appendix DO NOT USE THIS FILE!!!!!!!!!!!!!!!!!!!!!!!
+%
+% OneSingleAppendix.tex has all the settings needed to adjust for a single appendix
+% you will have a major problem with your TOC if you use this file with a single appendix!!!!!
+
+%
+% Comment (or delete) all of the \input{AppendixB} commands except those you are using.
+%Then open the AppendixA.tex file and continue there.
+
+%you can add/substract individual appendices through by using the /include{appendix'X'}
+% and creating/deleting the appropriate files
+\appendix %
+%\clearpage%
+
+
+\addtocontents{toc}{\protect\addvspace{10pt}\protect\noindent \protect APPENDIX\par}
+
+\input{tex/appendixA} %
+\input{tex/appendixB} %
+\input{tex/appendixC} %
+\input{tex/appendixD} %
+%\input{tex/appendixE} % %These files aren't included in the template
+%\input{tex/appendixF} %
+%\input{appendix/appendixC} 
+%\input{appendix/appendixD}
+%\input{appendix/appendixE}

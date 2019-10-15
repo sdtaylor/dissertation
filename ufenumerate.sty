@@ -1,0 +1,63 @@
+%
+% This is file `ufenumerate.sty',
+% customized from `enumerate.sty'.
+%
+% Antonio Paiva
+% Feb 2007
+%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ufenumerate}
+          [2007/02/16 v1.00 UF enumerate with extensions]
+\RequirePackage{calc}
+\RequirePackage{setspace}
+
+\newtoks\@enLab
+\def\@enQmark{?}
+\def\@enLabel#1#2{%
+  \edef\@enThe{\noexpand#1{\@enumctr}}%
+  \@enLab\expandafter{\the\@enLab\csname the\@enumctr\endcsname}%
+  \@enloop}
+\def\@enSpace{\afterassignment\@enSp@ce\let\@tempa= }
+\def\@enSp@ce{\@enLab\expandafter{\the\@enLab\space}\@enloop}
+\def\@enGroup#1{\@enLab\expandafter{\the\@enLab{#1}}\@enloop}
+\def\@enOther#1{\@enLab\expandafter{\the\@enLab#1}\@enloop}
+\def\@enloop{\futurelet\@entemp\@enloop@}
+\def\@enloop@{%
+  \ifx A\@entemp         \def\@tempa{\@enLabel\Alph  }\else
+  \ifx a\@entemp         \def\@tempa{\@enLabel\alph  }\else
+  \ifx i\@entemp         \def\@tempa{\@enLabel\roman }\else
+  \ifx I\@entemp         \def\@tempa{\@enLabel\Roman }\else
+  \ifx 1\@entemp         \def\@tempa{\@enLabel\arabic}\else
+  \ifx \@sptoken\@entemp \let\@tempa\@enSpace         \else
+  \ifx \bgroup\@entemp   \let\@tempa\@enGroup         \else
+  \ifx \@enum@\@entemp   \let\@tempa\@gobble          \else
+                         \let\@tempa\@enOther
+                         \@enhook
+             \fi\fi\fi\fi\fi\fi\fi\fi
+  \@tempa}
+\providecommand\@enhook{}
+\def\enumerate{%
+  \ifnum \@enumdepth >3 \@toodeep\else
+      \advance\@enumdepth \@ne
+      \edef\@enumctr{enum\romannumeral\the\@enumdepth}\fi
+  \@ifnextchar[{\@@enum@}{\@enum@}}
+\def\@@enum@[#1]{%
+  \noindent%
+  \@enLab{}\let\@enThe\@enQmark%
+  \@enloop#1\@enum@
+  \ifx\@enThe\@enQmark\@warning{The counter will not be printed.%
+   ^^J\space\@spaces\@spaces\@spaces The label is: \the\@enLab}\fi
+  \expandafter\edef\csname label\@enumctr\endcsname{\the\@enLab}%
+  \expandafter\let\csname the\@enumctr\endcsname\@enThe
+  \csname c@\@enumctr\endcsname7
+  \expandafter\settowidth
+            \csname leftmargin\romannumeral\@enumdepth\endcsname
+            {\the\@enLab\hspace{\labelsep}}%
+  \@enum@}
+\def\@enum@{\list{\csname label\@enumctr\endcsname}%
+           {\setlength{\itemsep}{0.5\baselineskip}%
+		   \usecounter{\@enumctr}\def\makelabel##1{\rlap{##1}}}\singlespacing}
+\endinput
+%%
+%% End of file `ufenumerate.sty'.

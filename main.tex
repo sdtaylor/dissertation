@@ -1,0 +1,193 @@
+% UF Sample ETD Main Document Fall 2014
+% 28 October, 2016: Modified slightly by LianTze Lim (Overleaf) to compile without errors
+\documentclass[12pt,final,CPage]{ufthesis}
+% Preamble %
+
+% Define Packages To be used and options %
+\include{packages}
+%\def\UrlFont{\rmfamily} %use this line for Times New Roman
+\def\UrlFont{\sffamily} %use this line for CMSS
+
+%\allowdisplaybreaks  % % This command allows equation arrays and similar environments
+% % % to break across pages to improve text flow - use only if needed.
+
+% Prevent figures, tables or algorithms from using a separate page or column alone
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.75}
+
+% *** Do not adjust lengths that control margins, column widths, etc. ***
+% *** Do not use packages that alter fonts (such as pslatex).         ***
+% There should be no need to do such things with IEEEtran.cls V1.6 and later.
+% correct bad hyphenation here
+%\hyphenation{op-tical net-works semi-C:\Program Files\MiKTeX 2.5\miktexconduc-tor}
+
+%------------------------------------------%
+
+% Extra commands or misc formatting such as page alignment or output paper-size commands
+
+%\include{extraparameters}
+
+%------------------------------------------%
+
+% Set your personal and paper information
+\SetFullName{James K. Booth}%
+\SetThesisType{Tutorial}%{Dissertation} %{Thesis}
+\SetDegreeType{Master of the Universe}% {Doctor of Philosophy} {Master of Science}
+\SetGradMonth{May}%
+\SetGradYear{2014}%
+\SetDepartment{Electronic Thesis and Dissertations}%
+\SetChair{James B. Albury}%
+%\SetCochair{John W. Carver III}%uncomment this line and enter the name of your cochair inside the braces if you have one.
+%If you have a cochair there two places in the ufthesis.cls file that will need to be uncommented as well
+%In the "getting personal information" section about line 630
+%And the "Abstract" Section around line 556
+% Type your title here in all CAPS %
+\SetTitle{UF ETD \LaTeXe  THESIS AND DISSERTATION TEMPLATE TUTORIAL}
+
+
+
+% Define student-specific info (self-explanatory) %
+%\include{userinfo}
+
+
+
+
+
+
+%------------------------------------------%
+
+% user defined commands in order to geC:\Program Files\MiKTeX 2.5\miktexnerate new commands, macros, and redefine default commands %
+\include{usersetcommands}
+
+%-------------------------------------------------------------------------------------------------------%
+
+% Begin Main Part of Document %
+
+\begin{document}
+
+
+ % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+ % Remember - You MUST get a .bst file that matches the Journal in your
+ % field that you choose as your Reference example
+ % NONE of these examples will satisfy the Graduate Editorial Office
+ % if they don't match your Journal example!!!!
+ % NOTE: If you use a numbered reference system and your references
+ % are set in parentheses rather than brackets you need to select the
+ % Natbib option "numbers sort and compress" in the packages.tex file
+ % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+
+ %Note that the path separator is a forward slash NOT a back slash
+ %Place YOUR .bst file in the bst folder and use that filename (without the .bst extension)
+ % as your Bibliography Style file
+
+%\bibliographystyle{bst/abbrv}
+%\bibliographystyle{bst/abbrvnat}
+%\bibliographystyle{bst/abbrvurl_uf}
+%\bibliographystyle{bst/alphaurl_uf}
+%\bibliographystyle{bst/apa-good}
+%\bibliographystyle{bst/Chicago_Web}
+%\bibliographystyle{bst/ecology_web}
+%\bibliographystyle{bst/IEEEtran}
+%\bibliographystyle{bst/mla_web}
+\bibliographystyle{bst/mla-good}
+%\bibliographystyle{bst/plainnat}
+%\bibliographystyle{bst/plainurl_uf}
+%\bibliographystyle{bst/Science_Web}
+%\bibliographystyle{bst/uf_econ}
+%\bibliographystyle{bst/uffull}
+%\bibliographystyle{bst/ufinit}
+%\bibliographystyle{bst/unsrtnat}
+%\bibliographystyle{bst/unsrturl_uf}
+%\bibliographystyle{bst/plain}
+%\bibliographystyle{bst/ufinit}
+%\bibliographystyle{bst/plainurl_uf}
+
+
+%-----------------------------------------------------------------------%
+
+\maketitle % % % % Creates the Title page from the information entered in userinfo.tex
+\makecopyright
+
+%------------------------------------------%
+
+\dedication{\input{tex/dedication}} % %Creates the dedication - if your dedication is more than a single line
+% % % % % % % % % % % % % % % % % %you will need to reduce the vspace amount to keep the text centered verticlly
+% % % % % % % % % % % % % % % % % %optional - comment or delete if you are not dedicating to anyone,
+
+%------------------------------------------%
+
+\include{tex/acknowledgements} % % % %Required - There is no requirement to acknowledge a particular person
+% % % % % % % % % % % % % % % % %but you must acknowledge someone (funding source, committee chair, spouse)?
+
+%------------------------------------------%
+
+% This file includes the file which creates the table of contents %
+\include{tex/TOC} %This file creates the Table of Contents, List of Figures, and List of Objects (if any)
+% % % % % % % %delete or comment the file you want to remove
+
+%------------------------------------------%
+
+%%This is an optional file. A list of abbreviations is NOT even suggested.
+%%Best practice is to define the item the first time it is used in the document
+
+%\include{tex/abbreviations}
+
+
+%------------------------------------------%
+% This line adds the word CHAPTER to the TOC just before the listing of the chapter and subsections begins
+\addtocontents{toc}{\protect\addvspace{10pt}\noindent{CHAPTER}\protect\hfill\par}{}% This extra line adds the word CHAPTER to the table of contents %
+\phantomsection
+\include{tex/abstract} %The abstract is created using this file and userinfo.tex
+% % % % % % % % % % %If you have a c-chair you must uncomment that line in userinfo.tex AND find the
+% % % % % % % % % % %co-chair lines in ufthesis.cls and un-comment those as well
+
+%-----------------------------------------------------------------------%
+
+% This section encompasses the main body of the paper from all the content through to the biographical sketch
+
+% Chapters to be included (more can be added by creating a new chapter#.tex %
+% file and then implementing the \inlcude{chapter#.tex} command as seen below %
+\include{tex/chapter1}
+\include{tex/chapter2}
+\include{tex/chapter3}
+\include{tex/chapter4}
+\include{tex/chapter5}
+%\include{tex/chapter6}  %These chapters are not included in the template
+%\include{tex/chapter7}
+
+%-----------------------------------------------------------------------%
+
+% Use the appropriate file depending upon the number of appendices you have
+
+
+\include{tex/TwoOrMoreAppendices} %Use this file if you have two or more appendices
+
+% \include{tex/OneSingleAppendix} %Use this file if you have one and only one appendix
+
+%------------------------------------------%
+
+% Make List of References (BibTeX implemented using the Natbib package)
+% un-comment your preferred bibliography style and replace the
+% bibliography file "sample" with the name of your .bib file
+% REMEMBER!!! If you want un-numbered references comment the Natbib package with
+% The numbered options in the packages.tex file and un-comment the package with the authoryear option
+% See the included pdfs of the various styles to see the differences.
+% The citation style differences are from the \citet{key} and \citep{key} commands
+% More options are available; see the Natbib documentation for details
+
+
+\bibliography {bib/sample,bib/example}
+% You can have more than one library of references - put the .bib file
+% in the bib folder and call it here
+%------------------------------------------%
+
+% Bio Sketch is required and should be in third person, past tense%
+\include{bio}
+
+%------------------------------------------%
+
+\end{document}
+
+%-------------------------------------------------------------------------------------------------------%

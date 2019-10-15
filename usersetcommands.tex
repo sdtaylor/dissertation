@@ -1,0 +1,68 @@
+% user defined commands %
+% Here is where you define optional commands such as macros, new commands,
+% and new environments to be used in your paper
+
+% optional command to prevent a word from breaking across a line %
+\hyphenchar\font=-1
+
+
+% Commands to produce proper bullet list
+\newlength{\widthOfItem}
+\let\Itemize=\itemize
+\let\endItemize=\enditemize
+\renewenvironment{itemize}{%
+	\begin{Itemize}
+		\setlength{\itemsep}{0.5\baselineskip}
+		\setlength{\labelwidth}{2em}
+		\setlength{\listparindent}{.32in}%
+		\setlength{\leftmargin}{.32in}
+		\setlength{\rightmargin}{0in}
+		\settowidth{\widthOfItem}{\labelitemi}
+		\setlength{\labelsep}{\leftmargin-\widthOfItem}
+		\renewcommand{\labelitemii}{--}
+		\singlespacing}{%
+	\end{Itemize}}
+
+% shortcut for setting up inserting \prime command in mathmode to avoid errors %
+\newcommand{\p}{^{\prime}}
+
+% shortcuts for prime color text
+\newcommand{\red}{\textcolor[rgb]{1.00,0.00,0.00}}
+\newcommand{\green}{\textcolor[rgb]{0.00,1.00,0.00}}
+\newcommand{\blue}{\textcolor[rgb]{0.00,0.00,1.00}}
+
+% Shorcut commands for mathmatical formulas %
+
+\newcommand{\latex}{\LaTeX 2\ensuremath{\epsilon}}
+
+% THEOREM Environments ---------------------------------------------------
+%These environments are provided as a convenience - feel free to modify if needed
+
+\newtheorem{theorem}{Theorem}[chapter]%To link the theorem to each chapter uncomment the chapter option
+\newtheorem{lemma}{Lemma}%[theorem]% To link each lemma to a theorem uncomment the theorem option
+\newtheorem{corollary}{Corollary}%[theorem]% To link each corollary to a theorem uncomment the theorem option
+% to link a corollary to a chapter change the theorem option to chapter
+\newtheorem{definition}{Definition}%[chapter] %the same is true for both definitions and assumptions
+\newtheorem{assumption}{Assumption}%[chapter] %
+\newtheorem{proposition}{Proposition}[chapter]
+\newtheorem{algorithm}{Algorithm}[chapter]
+
+
+%These were some user commands I've run across that I thought some might want to incorporate into their work
+%\newcommand{\bdm}{
+ %   \begin{displaymath}}
+
+%\newcommand{\edm}{
+%    \end{displaymath}}
+
+%\newcommand{\be}{
+%    \begin{equation}}
+
+%\newcommand{\ee}{
+%    \end{equation}}
+
+%\newcommand{\bea}{
+ %   \begin{eqnarray}}
+
+%\newcommand{\eea}{
+%    \end{eqnarray}}
